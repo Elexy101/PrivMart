@@ -2,6 +2,13 @@
 ## Advanced Everyday Payments and E-Commerce on Aleo Blockchain Using Leo Programming
 This is a decentralized e-commerce platform that handles everyday payments (e.g., deposits, withdrawals, purchases, refunds) with enhanced features like discounts, order verification, and privacy. It advances basic payments by incorporating atomic operations, discount logic, integrity hashes, and admin controls, all while leveraging Aleo's privacy features to keep sensitive data (e.g., buyer balances, order details) private. This program named `ecommerce_private_test1.aleo`, simulates a marketplace where sellers list products, buyers deposit funds and make purchases, and admins manage operations—all secured on-chain.
 
+## PROGRAM TRANSACTION ID
+TRANSACTION ID: 
+at107f057ppslzyg8qu273rjcx9m4kfantfw9c42uj4e5nwtrrztsrsw44yr7
+
+PROGRAM ADDRESS: 
+aleo193a0vh5ftsn735nwlwh00qjt5drcprrasyqyxfc7g89rcpywxy8s202ufv
+
 ### Key advancements include:
 
 - Privacy-Preserving Transactions: Uses Aleo zero-knowledge proofs to execute computations privately.
