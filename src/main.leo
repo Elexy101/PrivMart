@@ -86,7 +86,7 @@ program ecommerce_private_test1.aleo {
     // 💰 Deposit Funds to Smart Contract (Buyer)
     async transition deposit(program_address: address, amount: u64) -> Future {
         let caller: address = self.caller;
-        let deposit_future: Future = credits.aleo/transfer_public(program_address, amount);
+        let deposit_future: Future = credits.aleo/transfer_public_as_signer(program_address, amount);
         return finalize_deposit(caller, amount, deposit_future);
     }
 
