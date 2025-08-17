@@ -1,5 +1,5 @@
 import credits.aleo;
-program ecommerce_private.aleo;
+program ecommerce_private_test1.aleo;
 
 struct Product:
     id as u32;
@@ -84,14 +84,14 @@ mapping receipt_count:
 function deposit:
     input r0 as address.private;
     input r1 as u64.private;
-    call credits.aleo/transfer_public r0 r1 into r2;
+    call credits.aleo/transfer_public_as_signer r0 r1 into r2;
     async deposit self.caller r1 r2 into r3;
-    output r3 as ecommerce_private.aleo/deposit.future;
+    output r3 as ecommerce_private_test1.aleo/deposit.future;
 
 finalize deposit:
     input r0 as address.public;
     input r1 as u64.public;
-    input r2 as credits.aleo/transfer_public.future;
+    input r2 as credits.aleo/transfer_public_as_signer.future;
     await r2;
     get.or_use buyer_balance[r0] 0u64 into r3;
     add r3 r1 into r4;
@@ -101,7 +101,7 @@ function withdraw_buyer:
     input r0 as u64.private;
     call credits.aleo/transfer_public self.caller r0 into r1;
     async withdraw_buyer self.caller r0 r1 into r2;
-    output r2 as ecommerce_private.aleo/withdraw_buyer.future;
+    output r2 as ecommerce_private_test1.aleo/withdraw_buyer.future;
 
 finalize withdraw_buyer:
     input r0 as address.public;
@@ -126,7 +126,7 @@ function list_product:
     lte r5 100u32 into r7;
     assert.eq r7 true;
     async list_product self.caller r0 r1 r2 r3 r4 r5 into r8;
-    output r8 as ecommerce_private.aleo/list_product.future;
+    output r8 as ecommerce_private_test1.aleo/list_product.future;
 
 finalize list_product:
     input r0 as address.public;
@@ -156,7 +156,7 @@ function buy_product:
     input r2 as field.private;
     call credits.aleo/transfer_public self.caller 0u64 into r3;
     async buy_product r0 r1 self.caller r2 r3 into r4;
-    output r4 as ecommerce_private.aleo/buy_product.future;
+    output r4 as ecommerce_private_test1.aleo/buy_product.future;
 
 finalize buy_product:
     input r0 as u32.public;
@@ -227,7 +227,7 @@ function process_refund:
     assert.eq r3 true;
     call credits.aleo/transfer_public r1 r2 into r4;
     async process_refund r0 r4 into r5;
-    output r5 as ecommerce_private.aleo/process_refund.future;
+    output r5 as ecommerce_private_test1.aleo/process_refund.future;
 
 finalize process_refund:
     input r0 as u32.public;
@@ -269,7 +269,7 @@ function withdraw_seller:
     input r0 as u64.private;
     call credits.aleo/transfer_public self.caller r0 into r1;
     async withdraw_seller self.caller r0 r1 into r2;
-    output r2 as ecommerce_private.aleo/withdraw_seller.future;
+    output r2 as ecommerce_private_test1.aleo/withdraw_seller.future;
 
 finalize withdraw_seller:
     input r0 as address.public;
@@ -294,7 +294,7 @@ function update_order_status:
     or r5 r6 into r7;
     assert.eq r7 true;
     async update_order_status r0 r1 into r8;
-    output r8 as ecommerce_private.aleo/update_order_status.future;
+    output r8 as ecommerce_private_test1.aleo/update_order_status.future;
 
 finalize update_order_status:
     input r0 as u32.public;
@@ -308,7 +308,7 @@ function deactivate_product:
     is.eq self.caller aleo1f5enhpxfz3l3pqyh8k9d5xkqu0njv27xp5sv4nedarrk3nrgnuzqm3pp9h into r1;
     assert.eq r1 true;
     async deactivate_product r0 into r2;
-    output r2 as ecommerce_private.aleo/deactivate_product.future;
+    output r2 as ecommerce_private_test1.aleo/deactivate_product.future;
 
 finalize deactivate_product:
     input r0 as u32.public;
@@ -321,8 +321,11 @@ function add_discount_code:
     is.eq self.caller aleo1f5enhpxfz3l3pqyh8k9d5xkqu0njv27xp5sv4nedarrk3nrgnuzqm3pp9h into r1;
     assert.eq r1 true;
     async add_discount_code r0 into r2;
-    output r2 as ecommerce_private.aleo/add_discount_code.future;
+    output r2 as ecommerce_private_test1.aleo/add_discount_code.future;
 
 finalize add_discount_code:
     input r0 as field.public;
     set true into valid_discounts[r0];
+
+constructor:
+    assert.eq edition 0u16;
