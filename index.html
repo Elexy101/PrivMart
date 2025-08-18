@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeoCart - Decentralized Crypto Marketplace | Shop with ALEO</title>
+    <meta name="description" content="LeoCart is the premier decentralized marketplace powered by ALEO blockchain. Shop securely with cryptocurrency, explore unique products, and experience the future of e-commerce.">
+    <meta name="keywords" content="crypto marketplace, ALEO, blockchain, decentralized, e-commerce, cryptocurrency shopping">
+    
+    <meta property="og:title" content="LeoCart - Decentralized Crypto Marketplace">
+    <meta property="og:description" content="Shop securely with cryptocurrency on the premier ALEO-powered decentralized marketplace. Experience the future of e-commerce today.">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>LeoCart</h1>
+                    <div class="glow-dot"></div>
+                </div>
+                
+                <nav class="nav">
+                    <a href="#home" class="nav-link active" data-page="home">Home</a>
+                    <a href="#products" class="nav-link" data-page="products">Products</a>
+                    <a href="#about" class="nav-link">About</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="btn btn-wallet" id="connectWallet">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/>
+                        </svg>
+                        <span id="walletStatus">Connect Wallet</span>
+                    </button>
+                    
+                    <button class="btn btn-cart" id="cartBtn">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="8" cy="21" r="1"/>
+                            <circle cx="19" cy="21" r="1"/>
+                            <path d="m2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                        </svg>
+                        Cart
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Welcome to <span class="gradient-text">LeoCart</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        The future of decentralized commerce. Shop with crypto, trade with confidence.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-wallet btn-lg" id="heroConnectWallet">Connect Wallet</button>
+                        <button class="btn btn-outline btn-lg" id="exploreProducts">Explore Products</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wallet Actions -->
+            <section class="wallet-section">
+                <div class="container">
+                    <div class="wallet-card">
+                        <h2>Wallet Actions</h2>
+                        <div class="wallet-balance">
+                            <span>Balance: $<span id="walletBalance">0.00</span></span>
+                            <button class="btn btn-sm" id="checkBalance">Refresh</button>
+                        </div>
+                        <div class="wallet-actions">
+                            <div class="input-group">
+                                <input type="number" id="depositAmount" placeholder="Deposit amount" step="0.01" min="0">
+                                <button class="btn btn-wallet-action" id="depositBtn">Deposit</button>
+                            </div>
+                            <div class="input-group">
+                                <input type="number" id="withdrawAmount" placeholder="Withdraw amount" step="0.01" min="0">
+                                <button class="btn btn-wallet-action" id="withdrawBtn">Withdraw</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Products Page -->
+        <div id="productsPage" class="page">
+            <section class="products-section">
+                <div class="container">
+                    <h1 class="page-title">Our Products</h1>
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Cart Page -->
+        <div id="cartPage" class="page">
+            <section class="cart-section">
+                <div class="container">
+                    <h1 class="page-title">Shopping Cart</h1>
+                    <div class="cart-content">
+                        <div class="cart-items" id="cartItems">
+                            <!-- Cart items will be loaded here -->
+                        </div>
+                        <div class="cart-summary">
+                            <div class="summary-row">
+                                <span>Total: $<span id="cartTotal">0.00</span></span>
+                            </div>
+                            <button class="btn btn-wallet btn-lg" id="checkoutBtn">Checkout with Crypto</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
