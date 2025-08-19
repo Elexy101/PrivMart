@@ -127,6 +127,9 @@ In Leo, transitions are public entry points (callable by users), often async to 
         Mapping::set(valid_discounts, discount_code, (discount_code != 0field) ? true : Mapping::get_or_use(valid_discounts, discount_code, false));
     }
 ```
+## PREVIEW (ADMIN)
+<img width="1918" height="962" alt="Screenshot from 2025-08-19 18-29-51" src="https://github.com/user-attachments/assets/0501257c-4942-44ae-9539-bb3f23fb3d4d" />
+
 
 - async transition list_product(name: field, price: u64, stock: u32, category: field, discount_code: field, discount_rate: u32) -> (Future): Admin lists a new product with discount. Asserts admin caller and valid discount rate.
 - async function finalize_list_product(seller: address, name: field, price: u64, stock: u32, category: field, discount_code: field, discount_rate: u32): Increments product ID, stores the product, updates category indexes, and marks discount as valid if provided.
@@ -221,6 +224,10 @@ In Leo, transitions are public entry points (callable by users), often async to 
         Mapping::set(seller_balance, product.seller, current_balance + base_total);
     }
 ```
+
+## PREVIEW (BUYER)
+<img width="1918" height="962" alt="Screenshot from 2025-08-19 18-30-48" src="https://github.com/user-attachments/assets/abdf0ba3-f4df-44ff-bba5-6ddc5d03e408" />
+
 
 - async transition buy_product(product_id: u32, quantity: u32, discount_code: field) -> (Future): Buyers purchase using deposited funds. uses a placeholder future (actual transfer in finalize).
 - async function finalize_purchase(product_id: u32, quantity: u32, caller: address, discount_code: field, payment_future: Future): Verifies product/stock/balance, applies discount if valid, calculates verification hash, creates order/receipt, updates stock/balances/user trackers. Deducts full (undiscounted) amount from buyer, credits full to seller.
