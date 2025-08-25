@@ -26,7 +26,7 @@
             --neon-blue: #00f3ff;
             --neon-purple: #b300ff;
         }
-
+        
         body {
             background: linear-gradient(135deg, var(--dark), var(--cosmic-blue));
             color: var(--light);
@@ -35,7 +35,7 @@
             overflow-x: hidden;
             position: relative;
         }
-
+        
         /* Cosmic Background */
         .cosmic-bg {
             position: fixed;
@@ -46,7 +46,7 @@
             z-index: -2;
             overflow: hidden;
         }
-
+        
         .stars {
             position: absolute;
             top: 0;
@@ -56,40 +56,40 @@
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.8"/></svg>') repeat;
             animation: twinkle 10s infinite alternate;
         }
-
+        
         .stars:nth-child(2) {
             transform: scale(1.5);
             animation-delay: 2s;
         }
-
+        
         .stars:nth-child(3) {
             transform: scale(2);
             animation-delay: 4s;
         }
-
+        
         @keyframes twinkle {
             0% { opacity: 0.2; }
             100% { opacity: 0.8; }
         }
-
+        
         /* Nebula Effect */
         .nebula {
             position: absolute;
             width: 100%;
             height: 100%;
-            background:
+            background: 
                 radial-gradient(circle at 20% 30%, rgba(110, 69, 226, 0.15) 0%, transparent 30%),
                 radial-gradient(circle at 80% 70%, rgba(136, 211, 206, 0.15) 0%, transparent 30%),
                 radial-gradient(circle at 40% 60%, rgba(58, 29, 110, 0.15) 0%, transparent 30%);
             animation: nebulaPulse 20s infinite alternate;
         }
-
+        
         @keyframes nebulaPulse {
             0% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 0.8; transform: scale(1.02); }
             100% { opacity: 0.5; transform: scale(1); }
         }
-
+        
         /* Falling Dollars */
         .dollar-container {
             position: fixed;
@@ -101,7 +101,7 @@
             pointer-events: none;
             overflow: hidden;
         }
-
+        
         .dollar {
             position: absolute;
             color: rgba(136, 211, 206, 0.7);
@@ -112,7 +112,7 @@
             user-select: none;
             will-change: transform;
         }
-
+        
         @keyframes falling {
             0% {
                 transform: translateY(-50px) rotate(0deg);
@@ -129,7 +129,7 @@
                 opacity: 0;
             }
         }
-
+        
         /* Grid Effect */
         .grid-lines {
             position: fixed;
@@ -137,13 +137,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
+            background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             z-index: -1;
         }
-
+        
         /* Scanline Effect */
         .scanlines {
             position: fixed;
@@ -151,7 +151,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background:
+            background: 
                 repeating-linear-gradient(
                     to bottom,
                     transparent 0%,
@@ -162,12 +162,12 @@
             z-index: 1;
             animation: scanline 8s linear infinite;
         }
-
+        
         @keyframes scanline {
             0% { background-position: 0 0; }
             100% { background-position: 0 100vh; }
         }
-
+        
         /* Glow Effects */
         .glow {
             position: fixed;
@@ -178,21 +178,21 @@
             opacity: 0.3;
             z-index: -1;
         }
-
+        
         .glow-1 {
             background: var(--primary);
             top: 20%;
             left: 10%;
             animation: floatGlow 15s ease-in-out infinite;
         }
-
+        
         .glow-2 {
             background: var(--secondary);
             bottom: 20%;
             right: 10%;
             animation: floatGlow 18s ease-in-out infinite reverse;
         }
-
+        
         @keyframes floatGlow {
             0%, 100% {
                 transform: translate(0, 0);
@@ -207,7 +207,7 @@
                 transform: translate(-50px, 50px);
             }
         }
-
+        
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
@@ -219,7 +219,7 @@
             background: var(--primary);
             border-radius: 10px;
         }
-
+        
         /* Navbar */
         .navbar {
             background: rgba(26, 26, 46, 0.8);
@@ -229,12 +229,12 @@
             padding: 15px 0;
             transition: all 0.3s ease;
         }
-
+        
         .navbar.scrolled {
             padding: 10px 0;
             background: rgba(26, 26, 46, 0.95);
         }
-
+        
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
@@ -244,12 +244,12 @@
             display: flex;
             align-items: center;
         }
-
+        
         .navbar-brand i {
             margin-right: 10px;
             font-size: 1.8rem;
         }
-
+        
         /* Buttons */
         .btn {
             border-radius: 50px;
@@ -260,31 +260,31 @@
             overflow: hidden;
             border: none;
         }
-
+        
         .btn-primary {
             background: linear-gradient(45deg, var(--primary), #9f5afd);
             box-shadow: 0 4px 15px rgba(110, 69, 226, 0.4);
         }
-
+        
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(110, 69, 226, 0.6);
             background: linear-gradient(45deg, #7d5fff, #b06afd);
         }
-
+        
         .btn-primary:active {
             transform: translateY(1px);
         }
-
+        
         .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
+        
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.2);
         }
-
+        
         /* Cards */
         .card {
             background: rgba(255, 255, 255, 0.05);
@@ -295,7 +295,7 @@
             overflow: hidden;
             position: relative;
         }
-
+        
         .card::before {
             content: '';
             position: absolute;
@@ -307,23 +307,23 @@
             transform: translateX(-100%);
             transition: transform 0.6s ease;
         }
-
+        
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             border-color: rgba(110, 69, 226, 0.3);
         }
-
+        
         .card:hover::before {
             transform: translateX(100%);
         }
-
+        
         .card-header {
             background: rgba(0, 0, 0, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-weight: 600;
         }
-
+        
         /* Forms */
         .form-control {
             background: rgba(255, 255, 255, 0.05);
@@ -333,14 +333,14 @@
             padding: 12px 15px;
             transition: all 0.3s ease;
         }
-
+        
         .form-control:focus {
             background: rgba(255, 255, 255, 0.1);
             border-color: var(--primary);
             box-shadow: 0 0 0 0.25rem rgba(110, 69, 226, 0.25);
             color: var(--light);
         }
-
+        
         /* Alerts */
         .alert {
             border-radius: 10px;
@@ -357,12 +357,12 @@
             backdrop-filter: blur(10px);
             background: rgba(26, 26, 46, 0.8);
         }
-
+        
         .alert.show {
             opacity: 1;
             transform: translateY(0);
         }
-
+        
         /* Animations */
         @keyframes float {
             0%, 100% {
@@ -372,11 +372,11 @@
                 transform: translateY(-10px);
             }
         }
-
+        
         .floating {
             animation: float 3s ease-in-out infinite;
         }
-
+        
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(110, 69, 226, 0.7);
@@ -388,22 +388,22 @@
                 box-shadow: 0 0 0 0 rgba(110, 69, 226, 0);
             }
         }
-
+        
         .pulse {
             animation: pulse 2s infinite;
         }
-
+        
         /* Sections */
         .section {
             padding: 60px 0;
         }
-
+        
         .section-title {
             position: relative;
             margin-bottom: 40px;
             font-weight: 700;
         }
-
+        
         .section-title::after {
             content: '';
             position: absolute;
@@ -414,7 +414,7 @@
             background: linear-gradient(to right, var(--primary), var(--secondary));
             border-radius: 2px;
         }
-
+        
         .wallet-indicator {
             display: inline-block;
             width: 12px;
@@ -423,33 +423,33 @@
             margin-right: 8px;
             background: var(--danger);
         }
-
+        
         .wallet-indicator.connected {
             background: var(--success);
             box-shadow: 0 0 10px var(--success);
         }
-
+        
         .product-card {
             transition: all 0.3s ease;
             cursor: pointer;
         }
-
+        
         .product-card .card-img-top {
             height: 200px;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-
+        
         .product-card:hover .card-img-top {
             transform: scale(1.05);
         }
-
+        
         .product-price {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--secondary);
         }
-
+        
         .product-badge {
             position: absolute;
             top: 10px;
@@ -461,43 +461,43 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-
+        
         .modal-content {
             background: rgba(26, 26, 46, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             backdrop-filter: blur(10px);
         }
-
+        
         .modal-header {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         .modal-footer {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         .spinner-border {
             width: 1.5rem;
             height: 1.5rem;
             border-width: 0.2em;
         }
-
+        
         .hidden {
             display: none !important;
         }
-
+        
         .gradient-text {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
+        
         @media (max-width: 768px) {
             .navbar-brand {
                 font-size: 1.2rem;
             }
-
+            
             .section {
                 padding: 40px 0;
             }
@@ -516,16 +516,16 @@
         <div class="grid-lines"></div>
         <div class="scanlines"></div>
     </div>
-
+    
     <!-- Falling Dollars Container -->
     <div class="dollar-container" id="dollarContainer"></div>
-
+    
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <i class="fas fa-store"></i>
-                <span>AleoShop</span>
+                <span>PrivMart</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -551,7 +551,7 @@
         <!-- Hero Section -->
         <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
             <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4">Welcome to <span class="gradient-text">AleoShop</span></h1>
+                <h1 class="display-4 fw-bold mb-4">Welcome to <span class="gradient-text">PrivMart</span></h1>
                 <p class="lead mb-4">The future of private e-commerce is here. Shop with complete privacy using zero-knowledge proofs on the Aleo blockchain.</p>
                 <div id="walletInfo" class="hidden">
                     <div class="d-flex align-items-center mb-3">
@@ -565,15 +565,15 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
                      class="img-fluid rounded-3 floating shadow-lg" alt="E-Commerce">
             </div>
         </div>
 
         <!-- Products Section (Non-Admin) -->
-        <div id="products" class="section animate__animated animate__fadeIn">
+        <div id="products" class="section animate__animated animate__fadeIn" style="color: white;">
             <h2 class="section-title">Featured Products</h2>
-            <div id="productList" class="row g-4"></div>
+            <div id="productList" class="row g-4" style="color: white;"></div>
         </div>
 
         <!-- Buyer Actions (Non-Admin) -->
@@ -689,7 +689,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Discount Codes -->
                 <div class="col-lg-6" style="color: white;">
                     <div class="card h-100" style="color: white;">
@@ -705,7 +705,7 @@
                             <button id="addDiscountCodeBtn" class="btn btn-primary w-100 mb-4">
                                 <i class="fas fa-tag me-2"></i> Add Discount Code
                             </button>
-
+                            
                             <h4 class="mb-3">Active Discounts</h4>
                             <div id="discountCodesList" class="list-group">
                                 <div class="list-group-item bg-transparent text-white border-secondary">
@@ -715,7 +715,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Order Management -->
                 <div class="col-lg-6" style="color: white;">
                     <div class="card h-100" style="color: white;">
@@ -739,7 +739,7 @@
                             <button id="updateStatusBtn" class="btn btn-primary w-100 mb-4">
                                 <i class="fas fa-sync-alt me-2"></i> Update Status
                             </button>
-
+                            
                             <div class="mb-3">
                                 <label for="refundOrderId" class="form-label">Refund Order ID</label>
                                 <input type="number" class="form-control" id="refundOrderId" placeholder="123">
@@ -761,7 +761,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Store Management -->
                 <div class="col-lg-6" style="color: white;">
                     <div class="card h-100" style="color: white;">
@@ -777,7 +777,7 @@
                             <button id="deactivateProductBtn" class="btn btn-danger w-100 mb-4">
                                 <i class="fas fa-eye-slash me-2"></i> Deactivate Product
                             </button>
-
+                            
                             <div class="mb-3">
                                 <label for="withdrawSellerAmount" class="form-label">Withdraw Amount</label>
                                 <div class="input-group">
@@ -806,11 +806,11 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="d-flex align-items-center mb-4">
+                    <div class="d-flex align-items-center mb-4" style="color: white;">
                         <div class="flex-shrink-0">
                             <img id="modalProductImage" src="https://via.placeholder.com/100" class="img-fluid rounded" width="80" alt="Product">
                         </div>
-                        <div class="flex-grow-1 ms-3">
+                        <div class="flex-grow-1 ms-3" style="color: white;">
                             <h5 id="modalProductName" class="mb-1">Product Name</h5>
                             <p class="mb-0">
                                 Price: <span id="modalProductPrice" class="text-warning fw-bold">0</span> ALEO
@@ -820,12 +820,12 @@
                             </p>
                         </div>
                     </div>
-
+                    
                     <div class="mb-3">
                         <label for="purchaseQuantity" class="form-label">Quantity</label>
                         <input type="number" class="form-control" id="purchaseQuantity" value="1" min="1">
                     </div>
-
+                    
                     <div class="mb-3">
                         <label for="purchaseDiscountCode" class="form-label">Discount Code (optional)</label>
                         <div class="input-group">
@@ -838,7 +838,7 @@
                             <i class="fas fa-check-circle me-2"></i> <span id="discountAmount">20%</span> discount applied!
                         </div>
                     </div>
-
+                    
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <h5 class="mb-0">Total:</h5>
                         <h3 class="mb-0 text-primary" id="purchaseTotal">0 ALEO</h3>
@@ -913,7 +913,6 @@
         let dollarElements = [];
         let dollarInterval = null;
 
-
         // Sample product images
         const productImages = [
             'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1399&q=80',
@@ -936,38 +935,38 @@
             if (dollarInterval) {
                 clearInterval(dollarInterval);
             }
-
+            
             // Clear existing dollar elements
             dollarElements.forEach(el => el.remove());
             dollarElements = [];
-
+            
             // Create new dollar elements
             const dollarCount = 30;
             const colors = ['#88d3ce', '#6e45e2', '#00f3ff', '#b300ff'];
-
+            
             dollarInterval = setInterval(() => {
                 if (dollarElements.length < dollarCount) {
                     const dollar = document.createElement('div');
                     dollar.className = 'dollar';
                     dollar.innerHTML = '$';
-
+                    
                     // Random position and animation duration
                     const left = Math.random() * 100;
                     const duration = 10 + Math.random() * 20;
                     const delay = Math.random() * 15;
                     const size = 14 + Math.random() * 10;
                     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
+                    
                     dollar.style.left = `${left}%`;
                     dollar.style.animationDuration = `${duration}s`;
                     dollar.style.animationDelay = `${delay}s`;
                     dollar.style.fontSize = `${size}px`;
                     dollar.style.color = randomColor;
                     dollar.style.textShadow = `0 0 5px ${randomColor}`;
-
+                    
                     dollarContainer.appendChild(dollar);
                     dollarElements.push(dollar);
-
+                    
                     // Remove element when animation completes
                     setTimeout(() => {
                         dollar.remove();
@@ -1014,9 +1013,9 @@
                  .addClass(`alert-${type} show`);
             alert.html(`
                 <div class="d-flex align-items-center">
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' :
-                                    type === 'danger' ? 'fa-exclamation-circle' :
-                                    type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle'}
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 
+                                    type === 'danger' ? 'fa-exclamation-circle' : 
+                                    type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle'} 
                          me-2"></i>
                     <span>${message}</span>
                 </div>
@@ -1055,20 +1054,20 @@
                 updateProgress(30);
 
                 await window.leoWallet.connect("ON_CHAIN_HISTORY", "testnetbeta", ["credits.aleo", PROGRAM_ID]);
-
+                
                 const utf8Encode = new TextEncoder();
                 const bytes = utf8Encode.encode("Welcome to AleoShop, shop privately with zero-knowledge proofs!");
                 window.leoWallet.signMessage(bytes);
 
                 publicKey = window.leoWallet.publicKey;
-
+                
                 connectWalletBtn.innerHTML = `
                     <span id="walletIndicator" class="wallet-indicator connected"></span>
                     Connected <span class="wallet-address">${publicKey.slice(0, 6)}...${publicKey.slice(-4)}</span>
                 `;
                 walletInfo.classList.remove('hidden');
                 walletAddressEl.textContent = publicKey;
-
+                
                 if (publicKey === ADMIN_ADDRESS) {
                     adminPanel.classList.remove('hidden');
                     buyerPanel.classList.add('hidden');
@@ -1079,7 +1078,7 @@
                     buyerPanel.classList.remove('hidden');
                     productsSection.classList.remove('hidden');
                 }
-
+                
                 initDataFetching();
                 updateProgress(100);
                 setTimeout(() => $('#processingModal').modal('hide'), 500);
@@ -1112,12 +1111,12 @@
                 const apiUrl = `https://testnet.aleoscan.io/testnet/program/${PROGRAM_ID}/mapping/buyer_balance/${publicKey}`;
                 console.log(apiUrl);
                 const response = await fetch(apiUrl);
-
+                
                 if (!response.ok) throw new Error('Network response not ok');
 
                 const responseText = await response.text();
                 const finalValue = responseText.replace(/"/g, '').replace('u64', '');
-
+                
                 currentBalance = parseInt(finalValue) || 0;
                 const formattedBalance = (currentBalance / 1000000).toFixed(6);
                 walletBalanceEl.textContent = `${formattedBalance} ALEO`;
@@ -1130,201 +1129,268 @@
             }
         }
 
-        // Load products
         async function loadProducts() {
-            if (!publicKey) return;
+    if (!publicKey) {
+        console.log('No publicKey available, skipping product load');
+        showAlert('Please connect your wallet to load products.', 'warning');
+        return;
+    }
 
+    try {
+        productList.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3">Loading products...</p>
+            </div>
+        `;
+
+        const products = [];
+        let productId = 1;
+        const defaultImage = 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1470&q=80';
+
+        function parseAleoStruct(str) {
+            // Remove newlines and extra spaces
+            str = str.replace(/\n/g, '').replace(/\s+/g, '');
+
+            // Remove outer braces if present
+            if (str.startsWith('{') && str.endsWith('}')) {
+                str = str.slice(1, -1);
+            }
+
+            // Split by ,
+            const pairs = str.split(',');
+
+            const obj = {};
+            pairs.forEach(pair => {
+                const [key, value] = pair.split(':');
+                if (key && value) {
+                    obj[key.trim()] = value.trim();
+                }
+            });
+            return obj;
+        }
+
+        function fieldToString(fieldStr) {
             try {
-                productList.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <p class="mt-3">Loading products...</p>
-                    </div>
-                `;
-
-                const products = [
-                    {
-                        id: 1,
-                        name: "Premium Headphones",
-                        price: 150,
-                        stock: 25,
-                        category: "Electronics",
-                        discount_code: "AUDIO20",
-                        discount_rate: 20,
-                        image: productImages[0]
-                    },
-                    {
-                        id: 2,
-                        name: "Smart Watch",
-                        price: 299,
-                        stock: 15,
-                        category: "Wearables",
-                        discount_code: null,
-                        discount_rate: 0,
-                        image: productImages[1]
-                    },
-                    {
-                        id: 3,
-                        name: "Wireless Earbuds",
-                        price: 99,
-                        stock: 42,
-                        category: "Electronics",
-                        discount_code: "EARBUDS15",
-                        discount_rate: 15,
-                        image: productImages[2]
-                    },
-                    {
-                        id: 4,
-                        name: "Fitness Tracker",
-                        price: 79,
-                        stock: 18,
-                        category: "Wearables",
-                        discount_code: null,
-                        discount_rate: 0,
-                        image: productImages[3]
-                    },
-                    {
-                        id: 5,
-                        name: "Bluetooth Speaker",
-                        price: 129,
-                        stock: 8,
-                        category: "Audio",
-                        discount_code: "SUMMER10",
-                        discount_rate: 10,
-                        image: productImages[4]
-                    }
-                ];
-
-                displayProducts(products);
-            } catch (error) {
-                console.error('Error loading products:', error);
-                productList.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
-                        <h4>Error loading products</h4>
-                    </div>
-                `;
+                let num = BigInt(fieldStr);
+                const bytes = [];
+                while (num > 0n) {
+                    bytes.push(Number(num % 256n));
+                    num = num / 256n;
+                }
+                return new TextDecoder().decode(new Uint8Array(bytes)).trim();
+            } catch (e) {
+                return fieldStr;
             }
         }
 
-        // Display products
-        function displayProducts(products) {
-            productList.innerHTML = '';
-            if (products.length === 0) {
-                productList.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
-                        <h4>No products available</h4>
-                        <p class="text-muted">Check back later for new products</p>
+        // Fetch products sequentially until an invalid response is received
+        while (true) {
+            const apiUrl = `https://testnet.aleoscan.io/testnet/program/${PROGRAM_ID}/mapping/products/${productId}u32`;
+            console.log(`Fetching product from: ${apiUrl}`);
+            const response = await fetch(apiUrl);
+
+            // Log response status
+            console.log(`Response status for product ${productId}: ${response.status}`);
+
+            // Stop if response is not ok or 404
+            if (!response.ok || response.status === 404) {
+                console.log(`No more products found at ID ${productId} or response not ok: ${response.status}`);
+                break;
+            }
+
+            let data;
+            try {
+                data = await response.json();
+                console.log(`API response for product ${productId}:`, data);
+            } catch (error) {
+                console.error(`Failed to parse JSON for product ${productId}:`, error);
+                break;
+            }
+
+            // If data is a string, parse it to object
+            if (typeof data === 'string') {
+                data = parseAleoStruct(data);
+                console.log(`Parsed struct for product ${productId}:`, data);
+            }
+
+            // Stop if response is empty
+            if (!data || Object.keys(data).length === 0) {
+                console.log(`Empty response for product ${productId}`);
+                break;
+            }
+
+            // Use raw data with minimal processing
+            const nameRaw = data.name ? data.name.replace(/field$/, '').trim() : '';
+            const name = nameRaw ? fieldToString(nameRaw) : `Product ${productId}`;
+
+            const categoryRaw = data.category ? data.category.replace(/field$/, '').trim() : '';
+            const category = categoryRaw ? fieldToString(categoryRaw) : 'Uncategorized';
+
+            // Parse numeric fields with fallback
+            const price = data.price && typeof data.price === 'string' && data.price.includes('u64')
+                ? parseFloat(data.price.replace('u64', '')) / 1000000
+                : 0;
+
+            const stock = data.stock && typeof data.stock === 'string' && data.stock.includes('u32')
+                ? parseInt(data.stock.replace('u32', ''))
+                : 0;
+
+            // Use productId as fallback for id
+            const id = data.id && typeof data.id === 'string' && data.id.includes('u32')
+                ? parseInt(data.id.replace('u32', ''))
+                : productId;
+
+            // Add product even if price or stock is zero
+            products.push({
+                id: id,
+                name: name,
+                price: price,
+                stock: stock,
+                category: category,
+                image: defaultImage
+            });
+
+            console.log(`Added product ${productId}:`, { id, name, price, stock, category });
+
+            productId++;
+        }
+
+        console.log('Products loaded:', products);
+        if (products.length === 0) {
+            console.log('No valid products were loaded from the API');
+        }
+        displayProducts(products);
+    } catch (error) {
+        console.error('Error loading products:', error);
+        productList.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+                <h4>Error loading products</h4>
+                <p class="text-muted">Please try again later</p>
+            </div>
+        `;
+        showAlert('Failed to load products. Please check the console for details.', 'danger');
+    }
+}
+
+function displayProducts(products) {
+    productList.innerHTML = '';
+    if (!products || products.length === 0) {
+        productList.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+                <h4>No products available</h4>
+                <p class="text-muted">Check back later for new products</p>
+            </div>
+        `;
+        console.log('No products to display');
+        return;
+    }
+
+    products.forEach((product, index) => {
+        // Ensure all fields have valid display values
+        const displayName = product.name || `Product ${index + 1}`;
+        const displayCategory = product.category || 'Uncategorized';
+        const displayPrice = typeof product.price === 'number' ? product.price.toFixed(2) : '0.00';
+        const displayStock = typeof product.stock === 'number' ? product.stock : 0;
+
+        const card = `
+            <div class="col-md-4">
+                <div class="card product-card h-100">
+                    <img src="${product.image}" class="card-img-top" alt="${displayName}">
+                    <div class="card-body" style="color: white">
+                        <h5 class="card-title">${displayName}</h5>
+                        <p class="card-text" style="color: white">${displayCategory}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <h4 class="product-price mb-0">${displayPrice} ALEO</h4>
+                            <button class="btn btn-primary purchase-btn" 
+                                    data-id="${product.id || index + 1}" 
+                                    data-name="${displayName}" 
+                                    data-price="${displayPrice}"
+                                    data-stock="${displayStock}"
+                                    data-image="${product.image}">
+                                <i class="fas fa-shopping-cart me-2"></i> Buy
+                            </button>
+                        </div>
                     </div>
-                `;
+                    <div class="card-footer bg-transparent border-top-0" style="color: white">
+                        <small>${displayStock} in stock</small>
+                    </div>
+                </div>
+            </div>`;
+        productList.insertAdjacentHTML('beforeend', card);
+    });
+
+    $('.product-card').each(function(index) {
+        $(this).css('animation-delay', `${index * 0.1}s`).addClass('animate__animated animate__fadeInUp');
+    });
+
+    document.querySelectorAll('.purchase-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (!publicKey) {
+                showAlert('Please connect your wallet first', 'danger');
                 return;
             }
+            if (publicKey === ADMIN_ADDRESS) {
+                showAlert('Admin cannot purchase products', 'danger');
+                return;
+            }
+            
+            const id = this.dataset.id;
+            const name = this.dataset.name;
+            const price = this.dataset.price;
+            const stock = this.dataset.stock;
+            const image = this.dataset.image;
+            
+            $('#modalProductName').text(name || 'Unknown Product');
+            $('#modalProductPrice').text(price || '0.00');
+            $('#modalProductStock').text(stock || '0');
+            $('#modalProductImage').attr('src', image);
+            $('#confirmPurchaseBtn').data('id', id);
+            $('#confirmPurchaseBtn').data('price', price);
+            $('#purchaseQuantity').val(1).trigger('change');
+            $('#purchaseDiscountCode').val('');
+            $('#discountApplied').addClass('hidden');
+            $('#purchaseModal').modal('show');
+        });
+    });
 
-            products.forEach((product, index) => {
-                const discountBadge = product.discount_rate > 0 ? `
-                    <span class="product-badge pulse">${product.discount_rate}% OFF</span>
-                ` : '';
-
-                const card = `
-                    <div class="col-md-4">
-                        <div class="card product-card h-100">
-                            ${discountBadge}
-                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="card-text text-muted">${product.category}</p>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <h4 class="product-price mb-0">${product.price} ALEO</h4>
-                                    <button class="btn btn-primary purchase-btn"
-                                            data-id="${product.id}"
-                                            data-name="${product.name}"
-                                            data-price="${product.price}"
-                                            data-stock="${product.stock}"
-                                            data-image="${product.image}"
-                                            data-discount-code="${product.discount_code || ''}"
-                                            data-discount-rate="${product.discount_rate}">
-                                        <i class="fas fa-shopping-cart me-2"></i> Buy
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-transparent border-top-0">
-                                <small class="text-muted">${product.stock} in stock</small>
-                            </div>
-                        </div>
-                    </div>`;
-                productList.insertAdjacentHTML('beforeend', card);
-            });
-
-            $('.product-card').each(function(index) {
-                $(this).css('animation-delay', `${index * 0.1}s`).addClass('animate__animated animate__fadeInUp');
-            });
-
-            document.querySelectorAll('.purchase-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (!publicKey) {
-                        showAlert('Please connect your wallet first', 'danger');
-                        return;
-                    }
-                    if (publicKey === ADMIN_ADDRESS) {
-                        showAlert('Admin cannot purchase products', 'danger');
-                        return;
-                    }
-
-                    const id = this.dataset.id;
-                    const name = this.dataset.name;
-                    const price = this.dataset.price;
-                    const stock = this.dataset.stock;
-                    const image = this.dataset.image;
-                    const discountCode = this.dataset.discountCode;
-                    const discountRate = this.dataset.discountRate;
-
-                    $('#modalProductName').text(name);
-                    $('#modalProductPrice').text(price);
-                    $('#modalProductStock').text(stock);
-                    $('#modalProductImage').attr('src', image);
-                    $('#confirmPurchaseBtn').data('id', id);
-                    $('#confirmPurchaseBtn').data('price', price);
-                    $('#purchaseQuantity').val(1).trigger('change');
-                    $('#purchaseDiscountCode').val('');
-                    $('#discountApplied').addClass('hidden');
-                    $('#purchaseModal').modal('show');
-                });
-            });
-        }
+    console.log(`Displayed ${products.length} products:`, products);
+}
 
         // Update transaction progress
         function updateProgress(percent) {
             $('#transactionProgress').css('width', `${percent}%`);
         }
 
-// Helper function to convert string to Aleo field representation
-function stringToFields(str) {
-    const encoder = new TextEncoder();
-    const encoded = encoder.encode(str);
-    const fields = [];
-    let currentField = 0n;
-    let shift = 0n;
-
-    for (const byte of encoded) {
-        currentField += BigInt(byte) << shift;
-        shift += 8n;
-
-        if (shift >= 248n) {  // 248 = 256 - 8 (we can safely fit 31 bytes in a field)
-            fields.push(currentField);
-            currentField = 0n;
-            shift = 0n;
+        // Helper function to convert string to Aleo field representation
+        function stringToFields(str) {
+            const encoder = new TextEncoder();
+            const encoded = encoder.encode(str);
+            const fields = [];
+            let currentField = 0n;
+            let shift = 0n;
+            
+            for (const byte of encoded) {
+                currentField += BigInt(byte) << shift;
+                shift += 8n;
+                
+                if (shift >= 248n) {  // 248 = 256 - 8 (we can safely fit 31 bytes in a field)
+                    fields.push(currentField);
+                    currentField = 0n;
+                    shift = 0n;
+                }
+            }
+            
+            if (currentField > 0n || fields.length === 0) {
+                fields.push(currentField);
+            }
+            
+            return fields;
         }
-    }
-
-    if (currentField > 0n || fields.length === 0) {
-        fields.push(currentField);
-    }
-
-    return fields;
-}
 
         // Deposit funds
         async function depositFunds() {
@@ -1351,9 +1417,9 @@ function stringToFields(str) {
                 const aleoTransaction = Transaction.createTransaction(
                     publicKey,
                     'testnetbeta',
-                    'ecommerce_private_test1.aleo',
+                    PROGRAM_ID,
                     'deposit',
-                    [`${amount}u64`, CONTRACT_ADDRESS],
+                    [CONTRACT_ADDRESS, `${amount}u64`],
                     150_000
                 );
 
@@ -1459,8 +1525,8 @@ function stringToFields(str) {
 
                 const nameField = stringToFields(name)[0].toString().replace('n', '');
                 const categoryField = stringToFields(category)[0].toString().replace('n', '');
-                const discountCodeField = discountCode !== '0field' ? stringToFields(discountCode)[0].toString().replace('n', '') : '0field';
-
+                const discountCodeField = discountCode !== '0' ? stringToFields(discountCode)[0].toString().replace('n', '') : '0';
+                
                 console.log(discountCodeField);
 
                 const aleoTransaction = Transaction.createTransaction(
@@ -1468,7 +1534,7 @@ function stringToFields(str) {
                     'testnetbeta',
                     PROGRAM_ID,
                     'list_product',
-                    [`${nameField}field`, `${price}u64`, `${stock}u32`, `${categoryField}field`, `${discountCodeField}`, `${discountRate}u32`],
+                    [`${nameField}field`, `${price}u64`, `${stock}u32`, `${categoryField}field`, `${discountCodeField}field`, `${discountRate}u32`],
                     150_000
                 );
 
@@ -1824,7 +1890,7 @@ function stringToFields(str) {
                     PROGRAM_ID,
                     'buy_product',
                     [`${productId}u32`, `${quantity}u32`, `${discountCodeField}`],
-                    150_000
+                    300_000
                 );
 
                 await window.leoWallet.requestTransaction(aleoTransaction);
@@ -1851,7 +1917,7 @@ function stringToFields(str) {
         document.addEventListener('DOMContentLoaded', init);
     </script>
         <!-- Leo Wallet SDK -->
-        <script src="./leo-wallet-bundle.js"></script>
-        <script src="./transaction.js"></script>
+        <script src="./aleomonopoly/leo-wallet-bundle.js"></script>
+        <script src="./aleomonopoly/transaction.js"></script>
 </body>
 </html>
