@@ -396,4 +396,8 @@ In Leo, transitions are public entry points (callable by users), often async to 
 ## Privacy: Balances and orders are private; only necessary data is revealed.
 Improvements: Add more error handling, events, or multi-seller support.
 
+## YOUTUBE WATCH PREVIEW
+- ADMIN PANEL: https://youtu.be/1C0XFdacIpM
+- CUSTOMER/USER PANEL: https://youtu.be/eaNAg0DwSAg
+
 e>>>For full code, see the repository files. Contributions welcome!
