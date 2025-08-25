@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleo E-Commerce dApp</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #6e45e2;
+            --secondary: #88d3ce;
+            --dark: #0a0a1a;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #fd7e14;
+            --info: #17a2b8;
+            --cosmic-blue: #0f1c3f;
+            --cosmic-purple: #3a1d6e;
+            --neon-blue: #00f3ff;
+            --neon-purple: #b300ff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark), var(--cosmic-blue));
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Cosmic Background */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.8"/></svg>') repeat;
+            animation: twinkle 10s infinite alternate;
+        }
+
+        .stars:nth-child(2) {
+            transform: scale(1.5);
+            animation-delay: 2s;
+        }
+
+        .stars:nth-child(3) {
+            transform: scale(2);
+            animation-delay: 4s;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Nebula Effect */
+        .nebula {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(110, 69, 226, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(136, 211, 206, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 40% 60%, rgba(58, 29, 110, 0.15) 0%, transparent 30%);
+            animation: nebulaPulse 20s infinite alternate;
+        }
+
+        @keyframes nebulaPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        /* Falling Dollars */
+        .dollar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .dollar {
+            position: absolute;
+            color: rgba(136, 211, 206, 0.7);
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-blue);
+            animation: falling linear infinite;
+            user-select: none;
+            will-change: transform;
+        }
+
+        @keyframes falling {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(100vh + 50px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Grid Effect */
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        /* Scanline Effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0%,
+                    rgba(0, 243, 255, 0.05) 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100vh; }
+        }
+
+        /* Glow Effects */
+        .glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 {
+            background: var(--primary);
+            top: 20%;
+            left: 10%;
+            animation: floatGlow 15s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            background: var(--secondary);
+            bottom: 20%;
+            right: 10%;
+            animation: floatGlow 18s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(0, 100px);
+            }
+            75% {
+                transform: translate(-50px, 50px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        /* Buttons */
+        .btn {
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), #9f5afd);
+            box-shadow: 0 4px 15px rgba(110, 69, 226, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(110, 69, 226, 0.6);
+            background: linear-gradient(45deg, #7d5fff, #b06afd);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(110, 69, 226, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(110, 69, 226, 0.3);
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card-header {
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+
+        /* Forms */
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(110, 69, 226, 0.25);
+            color: var(--light);
+        }
+
+        /* Alerts */
+        .alert {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 46, 0.8);
+        }
+
+        .alert.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(110, 69, 226, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(110, 69, 226, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(110, 69, 226, 0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .wallet-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background: var(--danger);
+        }
+
+        .wallet-indicator.connected {
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .product-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .modal-content {
+            background: rgba(26, 26, 46, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spinner-border {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-width: 0.2em;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg">
+        <div class="stars"></div>
+        <div class="stars"></div>
+        <div class="stars"></div>
+        <div class="nebula"></div>
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="grid-lines"></div>
+        <div class="scanlines"></div>
+    </div>
+
+    <!-- Falling Dollars Container -->
+    <div class="dollar-container" id="dollarContainer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-store"></i>
+                <span>AleoShop</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button id="connectWallet" class="btn btn-primary">
+                            <span id="walletIndicator" class="wallet-indicator"></span>
+                            Connect Wallet
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container section" style="margin-top: 80px;">
+        <!-- Alert for Feedback -->
+        <div id="alert" class="alert" role="alert"></div>
+
+        <!-- Hero Section -->
+        <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Welcome to <span class="gradient-text">AleoShop</span></h1>
+                <p class="lead mb-4">The future of private e-commerce is here. Shop with complete privacy using zero-knowledge proofs on the Aleo blockchain.</p>
+                <div id="walletInfo" class="hidden">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-wallet me-2"></i>
+                        <span id="walletAddress" class="text-truncate" style="max-width: 300px;"></span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-coins me-2"></i>
+                        <span id="walletBalance">0</span> ALEO
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                     class="img-fluid rounded-3 floating shadow-lg" alt="E-Commerce">
+            </div>
+        </div>
+
+        <!-- Products Section (Non-Admin) -->
+        <div id="products" class="section animate__animated animate__fadeIn">
+            <h2 class="section-title">Featured Products</h2>
+            <div id="productList" class="row g-4"></div>
+        </div>
+
+        <!-- Buyer Actions (Non-Admin) -->
+        <div id="buyer" class="section animate__animated animate__fadeIn" style="color: white;">
+            <h2 class="section-title">Your Wallet</h2>
+            <div class="row g-4" style="color: white;">
+                <div class="col-md-6" style="color: white;">
+                    <div class="card p-4 h-100" style="color: white;">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-coins me-2 fs-4 text-warning"></i>
+                            <h3 class="mb-0">Deposit Funds</h3>
+                        </div>
+                        <div class="mb-3" style="color: white;">
+                            <label for="depositAmount" class="form-label">Amount (Aleo)</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="depositAmount" placeholder="10">
+                                <span class="input-group-text">ALEO</span>
+                            </div>
+                        </div>
+                        <button id="depositBtn" class="btn btn-primary w-100">
+                            <i class="fas fa-arrow-down me-2"></i> Deposit
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4 h-100">
+                        <div class="d-flex align-items-center mb-3" style="color: white;">
+                            <i class="fas fa-hand-holding-usd me-2 fs-4 text-success"></i>
+                            <h3 class="mb-0">Withdraw Funds</h3>
+                        </div>
+                        <div class="mb-3" style="color: white;">
+                            <label for="withdrawAmount" class="form-label">Amount (Aleo)</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="withdrawAmount" placeholder="5">
+                                <span class="input-group-text">ALEO</span>
+                            </div>
+                        </div>
+                        <button id="withdrawBuyerBtn" class="btn btn-primary w-100">
+                            <i class="fas fa-arrow-up me-2"></i> Withdraw
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12" style="color: white;">
+                    <div class="card p-4" style="color: white;">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-wallet me-2 fs-4 text-info"></i>
+                            <h3 class="mb-0">Wallet Balance</h3>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p id="balanceResult" class="fs-4 mb-0">Connect your wallet to view balance</p>
+                            </div>
+                            <button id="checkBalanceBtn" class="btn btn-primary">
+                                <i class="fas fa-sync-alt me-2"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Actions -->
+        <div id="admin" class="section hidden animate__animated animate__fadeIn">
+            <h2 class="section-title">Admin Dashboard</h2>
+            <div class="row g-4">
+                <!-- Product Management -->
+                <div class="col-lg-6" style="color: white;">
+                    <div class="card h-100" style="color: white;">
+                        <div class="card-header d-flex align-items-center">
+                            <i class="fas fa-boxes me-2"></i>
+                            <h3 class="mb-0">Product Management</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="productName" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="productPrice" class="form-label">Price</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="productPrice" placeholder="10">
+                                    <span class="input-group-text">ALEO</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productStock" class="form-label">Stock</label>
+                                <input type="number" class="form-control" id="productStock" placeholder="100">
+                            </div>
+                            <div class="mb-3">
+                                <label for="productCategory" class="form-label">Category</label>
+                                <input type="text" class="form-control" id="productCategory" placeholder="Electronics">
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="discountCode" class="form-label">Discount Code</label>
+                                        <input type="text" class="form-control" id="discountCode" placeholder="SUMMER20">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="discountRate" class="form-label">Discount Rate</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="discountRate" placeholder="20">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="listProductBtn" class="btn btn-primary w-100">
+                                <i class="fas fa-plus-circle me-2"></i> List Product
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discount Codes -->
+                <div class="col-lg-6" style="color: white;">
+                    <div class="card h-100" style="color: white;">
+                        <div class="card-header d-flex align-items-center">
+                            <i class="fas fa-tags me-2"></i>
+                            <h3 class="mb-0">Discount Codes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="newDiscountCode" class="form-label">New Discount Code</label>
+                                <input type="text" class="form-control" id="newDiscountCode" placeholder="Enter new code">
+                            </div>
+                            <button id="addDiscountCodeBtn" class="btn btn-primary w-100 mb-4">
+                                <i class="fas fa-tag me-2"></i> Add Discount Code
+                            </button>
+
+                            <h4 class="mb-3">Active Discounts</h4>
+                            <div id="discountCodesList" class="list-group">
+                                <div class="list-group-item bg-transparent text-white border-secondary">
+                                    No discount codes available
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Management -->
+                <div class="col-lg-6" style="color: white;">
+                    <div class="card h-100" style="color: white;">
+                        <div class="card-header d-flex align-items-center">
+                            <i class="fas fa-clipboard-list me-2"></i>
+                            <h3 class="mb-0">Order Management</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="orderIdStatus" class="form-label">Order ID</label>
+                                <input type="number" class="form-control" id="orderIdStatus" placeholder="123">
+                            </div>
+                            <div class="mb-3">
+                                <label for="newStatus" class="form-label">New Status</label>
+                                <select class="form-select" id="newStatus">
+                                    <option value="1field">Paid</option>
+                                    <option value="2field">Shipped</option>
+                                    <option value="3field">Refunded</option>
+                                </select>
+                            </div>
+                            <button id="updateStatusBtn" class="btn btn-primary w-100 mb-4">
+                                <i class="fas fa-sync-alt me-2"></i> Update Status
+                            </button>
+
+                            <div class="mb-3">
+                                <label for="refundOrderId" class="form-label">Refund Order ID</label>
+                                <input type="number" class="form-control" id="refundOrderId" placeholder="123">
+                            </div>
+                            <div class="mb-3">
+                                <label for="refundBuyer" class="form-label">Buyer Address</label>
+                                <input type="text" class="form-control" id="refundBuyer" placeholder="aleo1...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="refundAmount" class="form-label">Refund Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="refundAmount" placeholder="5">
+                                    <span class="input-group-text">ALEO</span>
+                                </div>
+                            </div>
+                            <button id="processRefundBtn" class="btn btn-warning w-100">
+                                <i class="fas fa-undo me-2"></i> Process Refund
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Management -->
+                <div class="col-lg-6" style="color: white;">
+                    <div class="card h-100" style="color: white;">
+                        <div class="card-header d-flex align-items-center">
+                            <i class="fas fa-store me-2"></i>
+                            <h3 class="mb-0">Store Management</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="deactivateProductId" class="form-label">Product ID to Deactivate</label>
+                                <input type="number" class="form-control" id="deactivateProductId" placeholder="1">
+                            </div>
+                            <button id="deactivateProductBtn" class="btn btn-danger w-100 mb-4">
+                                <i class="fas fa-eye-slash me-2"></i> Deactivate Product
+                            </button>
+
+                            <div class="mb-3">
+                                <label for="withdrawSellerAmount" class="form-label">Withdraw Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="withdrawSellerAmount" placeholder="100">
+                                    <span class="input-group-text">ALEO</span>
+                                </div>
+                            </div>
+                            <button id="withdrawSellerBtn" class="btn btn-success w-100">
+                                <i class="fas fa-money-bill-wave me-2"></i> Withdraw Earnings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="purchaseModalLabel">
+                        <i class="fas fa-shopping-cart me-2"></i> Purchase Product
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img id="modalProductImage" src="https://via.placeholder.com/100" class="img-fluid rounded" width="80" alt="Product">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 id="modalProductName" class="mb-1">Product Name</h5>
+                            <p class="mb-0">
+                                Price: <span id="modalProductPrice" class="text-warning fw-bold">0</span> ALEO
+                            </p>
+                            <p class="mb-0">
+                                Available: <span id="modalProductStock" class="text-success">0</span> in stock
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="purchaseQuantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="purchaseQuantity" value="1" min="1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="purchaseDiscountCode" class="form-label">Discount Code (optional)</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="purchaseDiscountCode" placeholder="SUMMER20">
+                            <button class="btn btn-outline-secondary" type="button" id="applyDiscountBtn">
+                                Apply
+                            </button>
+                        </div>
+                        <div id="discountApplied" class="text-success mt-2 hidden">
+                            <i class="fas fa-check-circle me-2"></i> <span id="discountAmount">20%</span> discount applied!
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <h5 class="mb-0">Total:</h5>
+                        <h3 class="mb-0 text-primary" id="purchaseTotal">0 ALEO</h3>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i> Cancel
+                    </button>
+                    <button type="button" id="confirmPurchaseBtn" class="btn btn-primary">
+                        <i class="fas fa-check me-2"></i> Confirm Purchase
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Processing Modal -->
+    <div class="modal fade" id="processingModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <div class="spinner-border text-primary mb-4" style="width: 4rem; height: 4rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h4 id="processingText">Processing Transaction...</h4>
+                    <p class="text-muted mt-3" id="processingSubtext">This may take a few moments</p>
+                    <div class="progress mt-4">
+                        <div id="transactionProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // DOM Elements
+        const connectWalletBtn = document.getElementById('connectWallet');
+        const walletInfo = document.getElementById('walletInfo');
+        const walletAddressEl = document.getElementById('walletAddress');
+        const walletBalanceEl = document.getElementById('walletBalance');
+        const balanceResult = document.getElementById('balanceResult');
+        const productList = document.getElementById('productList');
+        const adminPanel = document.getElementById('admin');
+        const buyerPanel = document.getElementById('buyer');
+        const productsSection = document.getElementById('products');
+        const depositBtn = document.getElementById('depositBtn');
+        const withdrawBuyerBtn = document.getElementById('withdrawBuyerBtn');
+        const checkBalanceBtn = document.getElementById('checkBalanceBtn');
+        const listProductBtn = document.getElementById('listProductBtn');
+        const addDiscountCodeBtn = document.getElementById('addDiscountCodeBtn');
+        const updateStatusBtn = document.getElementById('updateStatusBtn');
+        const deactivateProductBtn = document.getElementById('deactivateProductBtn');
+        const processRefundBtn = document.getElementById('processRefundBtn');
+        const withdrawSellerBtn = document.getElementById('withdrawSellerBtn');
+        const confirmPurchaseBtn = document.getElementById('confirmPurchaseBtn');
+        const applyDiscountBtn = document.getElementById('applyDiscountBtn');
+        const dollarContainer = document.getElementById('dollarContainer');
+
+        // State
+        let publicKey = null;
+        let currentBalance = 0;
+        const ADMIN_ADDRESS = 'aleo1f5enhpxfz3l3pqyh8k9d5xkqu0njv27xp5sv4nedarrk3nrgnuzqm3pp9h';
+        const CONTRACT_ADDRESS = 'aleo1ven5qj0mk2p95qskz7sf8cyxx88f7vnpyle4s9fkxfqtve33wsxqvnmpsu';
+        const PROGRAM_ID = 'ecommerce_private_test1.aleo';
+        let refreshIntervals = [];
+        let dollarElements = [];
+        let dollarInterval = null;
+
+
+        // Sample product images
+        const productImages = [
+            'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1399&q=80',
+            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1470&q=80',
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1470&q=80',
+            'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=1472&q=80',
+            'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1470&q=80'
+        ];
+
+        // Initialize
+        function init() {
+            setupEventListeners();
+            createFallingDollars();
+            loadProducts();
+        }
+
+        // Create falling dollar animation
+        function createFallingDollars() {
+            // Clear any existing interval
+            if (dollarInterval) {
+                clearInterval(dollarInterval);
+            }
+
+            // Clear existing dollar elements
+            dollarElements.forEach(el => el.remove());
+            dollarElements = [];
+
+            // Create new dollar elements
+            const dollarCount = 30;
+            const colors = ['#88d3ce', '#6e45e2', '#00f3ff', '#b300ff'];
+
+            dollarInterval = setInterval(() => {
+                if (dollarElements.length < dollarCount) {
+                    const dollar = document.createElement('div');
+                    dollar.className = 'dollar';
+                    dollar.innerHTML = '$';
+
+                    // Random position and animation duration
+                    const left = Math.random() * 100;
+                    const duration = 10 + Math.random() * 20;
+                    const delay = Math.random() * 15;
+                    const size = 14 + Math.random() * 10;
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+                    dollar.style.left = `${left}%`;
+                    dollar.style.animationDuration = `${duration}s`;
+                    dollar.style.animationDelay = `${delay}s`;
+                    dollar.style.fontSize = `${size}px`;
+                    dollar.style.color = randomColor;
+                    dollar.style.textShadow = `0 0 5px ${randomColor}`;
+
+                    dollarContainer.appendChild(dollar);
+                    dollarElements.push(dollar);
+
+                    // Remove element when animation completes
+                    setTimeout(() => {
+                        dollar.remove();
+                        dollarElements = dollarElements.filter(el => el !== dollar);
+                    }, duration * 1000);
+                }
+            }, 300);
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            connectWalletBtn.addEventListener('click', toggleWalletConnection);
+            depositBtn.addEventListener('click', depositFunds);
+            withdrawBuyerBtn.addEventListener('click', withdrawFunds);
+            checkBalanceBtn.addEventListener('click', fetchAccountData);
+            listProductBtn.addEventListener('click', listProduct);
+            addDiscountCodeBtn.addEventListener('click', addDiscountCode);
+            updateStatusBtn.addEventListener('click', updateOrderStatus);
+            deactivateProductBtn.addEventListener('click', deactivateProduct);
+            processRefundBtn.addEventListener('click', processRefund);
+            withdrawSellerBtn.addEventListener('click', withdrawSeller);
+            confirmPurchaseBtn.addEventListener('click', confirmPurchase);
+            applyDiscountBtn.addEventListener('click', applyDiscount);
+            document.querySelector('.btn-close').addEventListener('click', () => $('#purchaseModal').modal('hide'));
+            $('#purchaseModal').on('click', function(e) {
+                if (e.target === this) $('#purchaseModal').modal('hide');
+            });
+            $('#purchaseQuantity').on('change input', calculatePurchaseTotal);
+
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+        }
+
+        // Show alert
+        function showAlert(message, type = 'success', duration = 5000) {
+            const alert = $('#alert');
+            alert.removeClass('alert-success alert-danger alert-warning alert-info')
+                 .addClass(`alert-${type} show`);
+            alert.html(`
+                <div class="d-flex align-items-center">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' :
+                                    type === 'danger' ? 'fa-exclamation-circle' :
+                                    type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle'}
+                         me-2"></i>
+                    <span>${message}</span>
+                </div>
+            `);
+            setTimeout(() => {
+                alert.removeClass('show');
+                setTimeout(() => alert.empty(), 400);
+            }, duration);
+        }
+
+        // Toggle wallet connection
+        async function toggleWalletConnection() {
+            if (!window.leoWallet) {
+                showAlert('Please install Leo Wallet', 'danger');
+                return;
+            }
+
+            try {
+                if (publicKey) {
+                    publicKey = null;
+                    currentBalance = 0;
+                    connectWalletBtn.innerHTML = '<span id="walletIndicator" class="wallet-indicator"></span> Connect Wallet';
+                    walletInfo.classList.add('hidden');
+                    adminPanel.classList.add('hidden');
+                    buyerPanel.classList.remove('hidden');
+                    productsSection.classList.remove('hidden');
+                    balanceResult.textContent = 'Connect your wallet to view balance';
+                    clearAllIntervals();
+                    showAlert('Wallet disconnected', 'info');
+                    return;
+                }
+
+                $('#processingModal').modal('show');
+                $('#processingText').text('Connecting Wallet...');
+                $('#processingSubtext').text('Please approve the connection in your wallet');
+                updateProgress(30);
+
+                await window.leoWallet.connect("ON_CHAIN_HISTORY", "testnetbeta", ["credits.aleo", PROGRAM_ID]);
+
+                const utf8Encode = new TextEncoder();
+                const bytes = utf8Encode.encode("Welcome to AleoShop, shop privately with zero-knowledge proofs!");
+                window.leoWallet.signMessage(bytes);
+
+                publicKey = window.leoWallet.publicKey;
+
+                connectWalletBtn.innerHTML = `
+                    <span id="walletIndicator" class="wallet-indicator connected"></span>
+                    Connected <span class="wallet-address">${publicKey.slice(0, 6)}...${publicKey.slice(-4)}</span>
+                `;
+                walletInfo.classList.remove('hidden');
+                walletAddressEl.textContent = publicKey;
+
+                if (publicKey === ADMIN_ADDRESS) {
+                    adminPanel.classList.remove('hidden');
+                    buyerPanel.classList.add('hidden');
+                    productsSection.classList.add('hidden');
+                    showAlert('Admin mode activated', 'info');
+                } else {
+                    adminPanel.classList.add('hidden');
+                    buyerPanel.classList.remove('hidden');
+                    productsSection.classList.remove('hidden');
+                }
+
+                initDataFetching();
+                updateProgress(100);
+                setTimeout(() => $('#processingModal').modal('hide'), 500);
+                showAlert(`Wallet connected: ${publicKey.substring(0, 10)}...`, 'success');
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Connection failed: ' + error.message, 'danger');
+            }
+        }
+
+        // Initialize data fetching
+        function initDataFetching() {
+            clearAllIntervals();
+            fetchAccountData();
+            refreshIntervals.push(setInterval(fetchAccountData, 5000));
+            loadProducts();
+        }
+
+        // Clear refresh intervals
+        function clearAllIntervals() {
+            refreshIntervals.forEach(interval => clearInterval(interval));
+            refreshIntervals = [];
+        }
+
+        // Fetch account balance
+        async function fetchAccountData() {
+            if (!publicKey) return;
+
+            try {
+                const apiUrl = `https://testnet.aleoscan.io/testnet/program/${PROGRAM_ID}/mapping/buyer_balance/${publicKey}`;
+                console.log(apiUrl);
+                const response = await fetch(apiUrl);
+
+                if (!response.ok) throw new Error('Network response not ok');
+
+                const responseText = await response.text();
+                const finalValue = responseText.replace(/"/g, '').replace('u64', '');
+
+                currentBalance = parseInt(finalValue) || 0;
+                const formattedBalance = (currentBalance / 1000000).toFixed(6);
+                walletBalanceEl.textContent = `${formattedBalance} ALEO`;
+                balanceResult.innerHTML = `<span class="fs-2 fw-bold">${formattedBalance}</span> ALEO`;
+            } catch (error) {
+                console.error('Error fetching balance:', error);
+                walletBalanceEl.textContent = '0 ALEO';
+                balanceResult.textContent = 'Error fetching balance';
+                currentBalance = 0;
+            }
+        }
+
+        // Load products
+        async function loadProducts() {
+            if (!publicKey) return;
+
+            try {
+                productList.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-3">Loading products...</p>
+                    </div>
+                `;
+
+                const products = [
+                    {
+                        id: 1,
+                        name: "Premium Headphones",
+                        price: 150,
+                        stock: 25,
+                        category: "Electronics",
+                        discount_code: "AUDIO20",
+                        discount_rate: 20,
+                        image: productImages[0]
+                    },
+                    {
+                        id: 2,
+                        name: "Smart Watch",
+                        price: 299,
+                        stock: 15,
+                        category: "Wearables",
+                        discount_code: null,
+                        discount_rate: 0,
+                        image: productImages[1]
+                    },
+                    {
+                        id: 3,
+                        name: "Wireless Earbuds",
+                        price: 99,
+                        stock: 42,
+                        category: "Electronics",
+                        discount_code: "EARBUDS15",
+                        discount_rate: 15,
+                        image: productImages[2]
+                    },
+                    {
+                        id: 4,
+                        name: "Fitness Tracker",
+                        price: 79,
+                        stock: 18,
+                        category: "Wearables",
+                        discount_code: null,
+                        discount_rate: 0,
+                        image: productImages[3]
+                    },
+                    {
+                        id: 5,
+                        name: "Bluetooth Speaker",
+                        price: 129,
+                        stock: 8,
+                        category: "Audio",
+                        discount_code: "SUMMER10",
+                        discount_rate: 10,
+                        image: productImages[4]
+                    }
+                ];
+
+                displayProducts(products);
+            } catch (error) {
+                console.error('Error loading products:', error);
+                productList.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+                        <h4>Error loading products</h4>
+                    </div>
+                `;
+            }
+        }
+
+        // Display products
+        function displayProducts(products) {
+            productList.innerHTML = '';
+            if (products.length === 0) {
+                productList.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+                        <h4>No products available</h4>
+                        <p class="text-muted">Check back later for new products</p>
+                    </div>
+                `;
+                return;
+            }
+
+            products.forEach((product, index) => {
+                const discountBadge = product.discount_rate > 0 ? `
+                    <span class="product-badge pulse">${product.discount_rate}% OFF</span>
+                ` : '';
+
+                const card = `
+                    <div class="col-md-4">
+                        <div class="card product-card h-100">
+                            ${discountBadge}
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text text-muted">${product.category}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <h4 class="product-price mb-0">${product.price} ALEO</h4>
+                                    <button class="btn btn-primary purchase-btn"
+                                            data-id="${product.id}"
+                                            data-name="${product.name}"
+                                            data-price="${product.price}"
+                                            data-stock="${product.stock}"
+                                            data-image="${product.image}"
+                                            data-discount-code="${product.discount_code || ''}"
+                                            data-discount-rate="${product.discount_rate}">
+                                        <i class="fas fa-shopping-cart me-2"></i> Buy
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0">
+                                <small class="text-muted">${product.stock} in stock</small>
+                            </div>
+                        </div>
+                    </div>`;
+                productList.insertAdjacentHTML('beforeend', card);
+            });
+
+            $('.product-card').each(function(index) {
+                $(this).css('animation-delay', `${index * 0.1}s`).addClass('animate__animated animate__fadeInUp');
+            });
+
+            document.querySelectorAll('.purchase-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!publicKey) {
+                        showAlert('Please connect your wallet first', 'danger');
+                        return;
+                    }
+                    if (publicKey === ADMIN_ADDRESS) {
+                        showAlert('Admin cannot purchase products', 'danger');
+                        return;
+                    }
+
+                    const id = this.dataset.id;
+                    const name = this.dataset.name;
+                    const price = this.dataset.price;
+                    const stock = this.dataset.stock;
+                    const image = this.dataset.image;
+                    const discountCode = this.dataset.discountCode;
+                    const discountRate = this.dataset.discountRate;
+
+                    $('#modalProductName').text(name);
+                    $('#modalProductPrice').text(price);
+                    $('#modalProductStock').text(stock);
+                    $('#modalProductImage').attr('src', image);
+                    $('#confirmPurchaseBtn').data('id', id);
+                    $('#confirmPurchaseBtn').data('price', price);
+                    $('#purchaseQuantity').val(1).trigger('change');
+                    $('#purchaseDiscountCode').val('');
+                    $('#discountApplied').addClass('hidden');
+                    $('#purchaseModal').modal('show');
+                });
+            });
+        }
+
+        // Update transaction progress
+        function updateProgress(percent) {
+            $('#transactionProgress').css('width', `${percent}%`);
+        }
+
+// Helper function to convert string to Aleo field representation
+function stringToFields(str) {
+    const encoder = new TextEncoder();
+    const encoded = encoder.encode(str);
+    const fields = [];
+    let currentField = 0n;
+    let shift = 0n;
+
+    for (const byte of encoded) {
+        currentField += BigInt(byte) << shift;
+        shift += 8n;
+
+        if (shift >= 248n) {  // 248 = 256 - 8 (we can safely fit 31 bytes in a field)
+            fields.push(currentField);
+            currentField = 0n;
+            shift = 0n;
+        }
+    }
+
+    if (currentField > 0n || fields.length === 0) {
+        fields.push(currentField);
+    }
+
+    return fields;
+}
+
+        // Deposit funds
+        async function depositFunds() {
+            if (!publicKey || publicKey === ADMIN_ADDRESS) {
+                showAlert('Please connect a non-admin wallet', 'danger');
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('depositAmount').value) * 1000000;
+            if (!amount || amount <= 0) {
+                showAlert('Please enter a valid amount', 'danger');
+                return;
+            }
+
+            try {
+                depositBtn.disabled = true;
+                depositBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Processing...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Processing Deposit...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                console.log(PROGRAM_ID);
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    'ecommerce_private_test1.aleo',
+                    'deposit',
+                    [`${amount}u64`, CONTRACT_ADDRESS],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(80);
+                await fetchAccountData();
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Deposit successful!', 'success');
+                    depositBtn.disabled = false;
+                    depositBtn.innerHTML = `<i class="fas fa-arrow-down me-2"></i> Deposit`;
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Deposit failed: ' + error.message, 'danger');
+                depositBtn.disabled = false;
+                depositBtn.innerHTML = `<i class="fas fa-arrow-down me-2"></i> Deposit`;
+            }
+        }
+
+        // Withdraw funds
+        async function withdrawFunds() {
+            if (!publicKey || publicKey === ADMIN_ADDRESS) {
+                showAlert('Please connect a non-admin wallet', 'danger');
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('withdrawAmount').value) * 1000000;
+            if (!amount || amount <= 0) {
+                showAlert('Please enter a valid amount', 'danger');
+                return;
+            }
+
+            if (amount > currentBalance) {
+                showAlert('Insufficient balance', 'danger');
+                return;
+            }
+
+            try {
+                withdrawBuyerBtn.disabled = true;
+                withdrawBuyerBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Processing...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Processing Withdrawal...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'withdraw_buyer',
+                    [`${amount}u64`],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(80);
+                await fetchAccountData();
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Withdrawal successful!', 'success');
+                    withdrawBuyerBtn.disabled = false;
+                    withdrawBuyerBtn.innerHTML = `<i class="fas fa-arrow-up me-2"></i> Withdraw`;
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Withdrawal failed: ' + error.message, 'danger');
+                withdrawBuyerBtn.disabled = false;
+                withdrawBuyerBtn.innerHTML = `<i class="fas fa-arrow-up me-2"></i> Withdraw`;
+            }
+        }
+
+        // List product
+        async function listProduct() {
+            if (!publicKey || publicKey !== ADMIN_ADDRESS) {
+                showAlert('Only admin can list products', 'danger');
+                return;
+            }
+
+            const name = document.getElementById('productName').value;
+            const price = parseInt(document.getElementById('productPrice').value) * 1000000;
+            const stock = parseInt(document.getElementById('productStock').value);
+            const category = document.getElementById('productCategory').value;
+            const discountCode = document.getElementById('discountCode').value || '0field';
+            const discountRate = parseInt(document.getElementById('discountRate').value) || 0;
+
+            if (!name || !price || !stock || !category) {
+                showAlert('Please fill all required fields', 'danger');
+                return;
+            }
+
+            try {
+                listProductBtn.disabled = true;
+                listProductBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Listing...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Listing Product...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                const nameField = stringToFields(name)[0].toString().replace('n', '');
+                const categoryField = stringToFields(category)[0].toString().replace('n', '');
+                const discountCodeField = discountCode !== '0field' ? stringToFields(discountCode)[0].toString().replace('n', '') : '0field';
+
+                console.log(discountCodeField);
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'list_product',
+                    [`${nameField}field`, `${price}u64`, `${stock}u32`, `${categoryField}field`, `${discountCodeField}`, `${discountRate}u32`],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Product listed successfully!', 'success');
+                    listProductBtn.disabled = false;
+                    listProductBtn.innerHTML = `<i class="fas fa-plus-circle me-2"></i> List Product`;
+                    document.getElementById('productName').value = '';
+                    document.getElementById('productPrice').value = '';
+                    document.getElementById('productStock').value = '';
+                    document.getElementById('productCategory').value = '';
+                    document.getElementById('discountCode').value = '';
+                    document.getElementById('discountRate').value = '';
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Failed to list product: ' + error.message, 'danger');
+                listProductBtn.disabled = false;
+                listProductBtn.innerHTML = `<i class="fas fa-plus-circle me-2"></i> List Product`;
+            }
+        }
+
+        // Add discount code
+        async function addDiscountCode() {
+            if (!publicKey || publicKey !== ADMIN_ADDRESS) {
+                showAlert('Only admin can add discount codes', 'danger');
+                return;
+            }
+
+            const code = document.getElementById('newDiscountCode').value;
+            if (!code) {
+                showAlert('Please enter a discount code', 'danger');
+                return;
+            }
+
+            try {
+                addDiscountCodeBtn.disabled = true;
+                addDiscountCodeBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Adding...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Adding Discount Code...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                const codeField = stringToFields(code)[0].toString().replace('n', '');
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'add_discount_code',
+                    [`${codeField}field`],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(100);
+
+                $('#discountCodesList').prepend(`
+                    <div class="list-group-item bg-transparent text-white border-secondary d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary rounded-pill">${code}</span>
+                        <button class="btn btn-sm btn-outline-danger remove-discount-btn" data-code="${code}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Discount code added successfully!', 'success');
+                    addDiscountCodeBtn.disabled = false;
+                    addDiscountCodeBtn.innerHTML = `<i class="fas fa-tag me-2"></i> Add Discount Code`;
+                    document.getElementById('newDiscountCode').value = '';
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Failed to add discount code: ' + error.message, 'danger');
+                addDiscountCodeBtn.disabled = false;
+                addDiscountCodeBtn.innerHTML = `<i class="fas fa-tag me-2"></i> Add Discount Code`;
+            }
+        }
+
+        // Update order status
+        async function updateOrderStatus() {
+            if (!publicKey || publicKey !== ADMIN_ADDRESS) {
+                showAlert('Only admin can update order status', 'danger');
+                return;
+            }
+
+            const orderId = document.getElementById('orderIdStatus').value;
+            const newStatus = document.getElementById('newStatus').value;
+
+            if (!orderId || !newStatus) {
+                showAlert('Please fill all required fields', 'danger');
+                return;
+            }
+
+            try {
+                updateStatusBtn.disabled = true;
+                updateStatusBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Updating...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Updating Order Status...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'update_order_status',
+                    [`${orderId}u32`, newStatus],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Order status updated successfully!', 'success');
+                    updateStatusBtn.disabled = false;
+                    updateStatusBtn.innerHTML = `<i class="fas fa-sync-alt me-2"></i> Update Status`;
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Failed to update order status: ' + error.message, 'danger');
+                updateStatusBtn.disabled = false;
+                updateStatusBtn.innerHTML = `<i class="fas fa-sync-alt me-2"></i> Update Status`;
+            }
+        }
+
+        // Deactivate product
+        async function deactivateProduct() {
+            if (!publicKey || publicKey !== ADMIN_ADDRESS) {
+                showAlert('Only admin can deactivate products', 'danger');
+                return;
+            }
+
+            const productId = document.getElementById('deactivateProductId').value;
+            if (!productId) {
+                showAlert('Please enter a product ID', 'danger');
+                return;
+            }
+
+            try {
+                deactivateProductBtn.disabled = true;
+                deactivateProductBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Processing...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Deactivating Product...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'deactivate_product',
+                    [`${productId}u32`],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Product deactivated successfully!', 'success');
+                    deactivateProductBtn.disabled = false;
+                    deactivateProductBtn.innerHTML = `<i class="fas fa-eye-slash me-2"></i> Deactivate Product`;
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Failed to deactivate product: ' + error.message, 'danger');
+                deactivateProductBtn.disabled = false;
+                deactivateProductBtn.innerHTML = `<i class="fas fa-eye-slash me-2"></i> Deactivate Product`;
+            }
+        }
+
+        // Process refund
+        async function processRefund() {
+            if (!publicKey || publicKey !== ADMIN_ADDRESS) {
+                showAlert('Only admin can process refunds', 'danger');
+                return;
+            }
+
+            const orderId = document.getElementById('refundOrderId').value;
+            const buyer = document.getElementById('refundBuyer').value;
+            const amount = parseInt(document.getElementById('refundAmount').value) * 1000000;
+
+            if (!orderId || !buyer || !amount) {
+                showAlert('Please fill all required fields', 'danger');
+                return;
+            }
+
+            try {
+                processRefundBtn.disabled = true;
+                processRefundBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Processing...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Processing Refund...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'process_refund',
+                    [`${orderId}u32`, buyer, `${amount}u64`],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Refund processed successfully!', 'success');
+                    processRefundBtn.disabled = false;
+                    processRefundBtn.innerHTML = `<i class="fas fa-undo me-2"></i> Process Refund`;
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Failed to process refund: ' + error.message, 'danger');
+                processRefundBtn.disabled = false;
+                processRefundBtn.innerHTML = `<i class="fas fa-undo me-2"></i> Process Refund`;
+            }
+        }
+
+        // Withdraw seller earnings
+        async function withdrawSeller() {
+            if (!publicKey || publicKey !== ADMIN_ADDRESS) {
+                showAlert('Only admin can withdraw seller earnings', 'danger');
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('withdrawSellerAmount').value) * 1000000;
+            if (!amount || amount <= 0) {
+                showAlert('Please enter a valid amount', 'danger');
+                return;
+            }
+
+            try {
+                withdrawSellerBtn.disabled = true;
+                withdrawSellerBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Processing...`;
+                $('#processingModal').modal('show');
+                $('#processingText').text('Processing Withdrawal...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(30);
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'withdraw_seller',
+                    [`${amount}u64`],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Seller withdrawal successful!', 'success');
+                    withdrawSellerBtn.disabled = false;
+                    withdrawSellerBtn.innerHTML = `<i class="fas fa-money-bill-wave me-2"></i> Withdraw Earnings`;
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Withdrawal failed: ' + error.message, 'danger');
+                withdrawSellerBtn.disabled = false;
+                withdrawSellerBtn.innerHTML = `<i class="fas fa-money-bill-wave me-2"></i> Withdraw Earnings`;
+            }
+        }
+
+        // Apply discount code
+        function applyDiscount() {
+            const code = document.getElementById('purchaseDiscountCode').value;
+            if (!code) {
+                showAlert('Please enter a discount code', 'warning');
+                return;
+            }
+
+            const validCodes = ['AUDIO20', 'EARBUDS15', 'SUMMER10'];
+            if (validCodes.includes(code)) {
+                const discountRate = code === 'AUDIO20' ? 20 : code === 'EARBUDS15' ? 15 : 10;
+                $('#discountAmount').text(`${discountRate}%`);
+                $('#discountApplied').removeClass('hidden');
+                calculatePurchaseTotal(discountRate);
+                showAlert('Discount code applied!', 'success');
+            } else {
+                showAlert('Invalid discount code', 'danger');
+            }
+        }
+
+        // Calculate purchase total
+        function calculatePurchaseTotal(discountRate = 0) {
+            const price = parseFloat($('#confirmPurchaseBtn').data('price'));
+            const quantity = parseInt(document.getElementById('purchaseQuantity').value) || 1;
+            const stock = parseInt(document.getElementById('modalProductStock').textContent);
+
+            if (quantity > stock) {
+                document.getElementById('purchaseQuantity').value = stock;
+                showAlert(`Only ${stock} items available`, 'warning');
+                return;
+            }
+
+            const subtotal = price * quantity;
+            const discount = subtotal * (discountRate / 100);
+            const total = subtotal - discount;
+            document.getElementById('purchaseTotal').textContent = `${total.toFixed(2)} ALEO`;
+        }
+
+        // Confirm purchase
+        async function confirmPurchase() {
+            if (!publicKey || publicKey === ADMIN_ADDRESS) {
+                showAlert('Please connect a non-admin wallet', 'danger');
+                return;
+            }
+
+            const productId = $('#confirmPurchaseBtn').data('id');
+            const quantity = parseInt(document.getElementById('purchaseQuantity').value);
+            const discountCode = document.getElementById('purchaseDiscountCode').value || '0field';
+            const price = parseFloat($('#confirmPurchaseBtn').data('price')) * 1000000 * quantity;
+
+            if (!quantity || quantity <= 0) {
+                showAlert('Please enter a valid quantity', 'danger');
+                return;
+            }
+
+            if (price > currentBalance) {
+                showAlert('Insufficient balance', 'danger');
+                return;
+            }
+
+            try {
+                confirmPurchaseBtn.disabled = true;
+                confirmPurchaseBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Processing...`;
+                $('#purchaseModal').modal('hide');
+                $('#processingModal').modal('show');
+                $('#processingText').text('Processing Purchase...');
+                $('#processingSubtext').text('Confirm the transaction in your wallet');
+                updateProgress(20);
+
+                const discountCodeField = discountCode !== '0field' ? stringToFields(discountCode)[0].toString().replace('n', '') : '0field';
+
+                const aleoTransaction = Transaction.createTransaction(
+                    publicKey,
+                    'testnetbeta',
+                    PROGRAM_ID,
+                    'buy_product',
+                    [`${productId}u32`, `${quantity}u32`, `${discountCodeField}`],
+                    150_000
+                );
+
+                await window.leoWallet.requestTransaction(aleoTransaction);
+                updateProgress(80);
+                await fetchAccountData();
+                await loadProducts();
+                updateProgress(100);
+
+                setTimeout(() => {
+                    $('#processingModal').modal('hide');
+                    showAlert('Purchase successful!', 'success');
+                    confirmPurchaseBtn.disabled = false;
+                    confirmPurchaseBtn.innerHTML = `<i class="fas fa-check me-2"></i> Confirm Purchase`;
+                }, 500);
+            } catch (error) {
+                $('#processingModal').modal('hide');
+                showAlert('Purchase failed: ' + error.message, 'danger');
+                confirmPurchaseBtn.disabled = false;
+                confirmPurchaseBtn.innerHTML = `<i class="fas fa-check me-2"></i> Confirm Purchase`;
+            }
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+        <!-- Leo Wallet SDK -->
+        <script src="./leo-wallet-bundle.js"></script>
+        <script src="./transaction.js"></script>
+</body>
+</html>
