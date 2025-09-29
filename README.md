@@ -401,6 +401,7 @@ In Leo, transitions are public entry points (callable by users), often async to 
 Improvements: Add more error handling, events, or multi-seller support.
 
 ## YOUTUBE WATCH PREVIEW
+FULL VIDEO(VOICE ENABLED): https://youtu.be/i9d9e4vuFGg?si=Dj72ZiTt7ij52WTb
 - ADMIN PANEL: https://youtu.be/1C0XFdacIpM
 - CUSTOMER/USER PANEL: https://youtu.be/eaNAg0DwSAg
 
